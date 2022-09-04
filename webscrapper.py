@@ -40,13 +40,13 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# class GraphicsCard:
-#     type = 'GPU'
+class GraphicsCard:
+    type = 'GPU'
 
-#     def __init__(self, model, price):
-#         # Instance Variable
-#         self.model = model
-#         self.price = price
+    def __init__(self, model, price):
+        # Instance Variable
+        self.model = model
+        self.price = price
 
 #  Get request from a page of GPU
 
@@ -57,23 +57,36 @@ r = requests.get("https://www.memoryexpress.com/Category/VideoCards")
 soup = BeautifulSoup(r.content,'html.parser')
 
 # GPU Price
-# s = soup.find('div', class_ = 'c-shca-icon-item__summary-list')
-
+price = soup.find_all('div', class_ = 'c-shca-icon-item__summary-list')
+# print(len(price))
+# print(price)
 
 # GPU Title
 title = soup.find_all('div', class_ = 'c-shca-icon-item__body-name')
-print(title)
+# print(title)
 
-for t in title:
-    print(t.find('a').text.strip())
-# print(s)
-
-# print(s[0])
+# Prints out the title of every GPU in memx within page 1
+# for t in title:
+#     print(t.find('a').text.strip())
 
 # Prints out the price of every GPU in memx within page 1
-# I could create an object to store these data in it. 
-# for gpu in s:
-#     print(gpu.find('span').text.strip())
+# for p in price:
+#     print(p.find('span').text.strip())
+
+something = []
+
+for i in range(len(price)):
+    # print(i)
+    t1 = title[i].find('a').text.strip()
+    p1 = price[i].find('span').text.strip()
+    b = GraphicsCard(t1,p1)
+    something.append(b)
+    # print(GraphicsCard(title[i],price[i]))
+
+# print(something)
+# print(len(something))
+print(something[0].model)
+print(something[0].price)
 
 
 
