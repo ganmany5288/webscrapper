@@ -36,10 +36,12 @@ for i in range(len(price)):
     # print(i)
     t1 = title[i].find('a').text.strip()
     p1 = price[i].find('span').text.strip()
-    b = GraphicsCard(t1,p1)
-    something.append(b)
-    test = [t1,p1]
-    rows.append(test)
+    # b = GraphicsCard(t1,p1)
+    # something.append(b)
+    if ('RTX' in t1 or 'RX' in t1):
+        print(t1)
+        test = [t1,p1]
+        rows.append(test)
 
     # print(GraphicsCard(title[i],price[i]))
 
@@ -49,12 +51,12 @@ for i in range(len(price)):
 # print(something[0].model)
 # print(something[0].price)
 
-print(rows)
+# print(rows)
 with open(filename,'w') as csvfile:
     csvwriter = csv.writer(csvfile)
     csvwriter.writerow(fieldname)
-    csvwriter.writerow(rows)
+    csvwriter.writerows(rows)
 
 
-csvfile.close()
+# csvfile.close()
 
