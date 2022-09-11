@@ -3,7 +3,6 @@ import csv
 from bs4 import BeautifulSoup
 from time import sleep
 
-
 class GraphicsCard:
 
     def __init__(self, brand, model, price):
@@ -17,25 +16,12 @@ pages = [
     "https://www.memoryexpress.com/Category/VideoCards?PageSize=120&Page=2"
 ]
 
-
-
-#  Get request from a page of GPU
-r = requests.get("https://www.memoryexpress.com/Category/VideoCards")
-
-# Parses request
-soup = BeautifulSoup(r.content,'html.parser')
-
-# GPU Price
-price = soup.find_all('div', class_ = 'c-shca-icon-item__summary-list')
-
-# GPU Title, returns a list of objects
-title = soup.find_all('div', class_ = 'c-shca-icon-item__body-name')
 # Remember that XFX and Zotac uses c-shca-icon-item__body-name-brand and uses .text unlike the rest of the brand.
 
 
 gpu_name = ["3060", "3060 Ti", "3070", "3070 Ti", "3080", "3080 Ti", "3090", "3090 Ti","6700", "6700 XT", "6800", "6800 XT", "6900 XT", "6950 XT"]
 
-filename = 'gpu_recordsFORREAL2.csv'
+filename = 'gpu_recordsFORREAL.csv'
 brand = ""
 fieldheader = ['Brand','Title', 'Price']
 something = []
@@ -83,7 +69,7 @@ def filewrite():
     # print(rows)
     with open(filename,'a') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(fieldheader)
+        # csvwriter.writerow(fieldheader)
         csvwriter.writerows(rows)
 
     csvfile.close()
@@ -108,6 +94,12 @@ price = soup.find_all('div', class_ = 'c-shca-icon-item__summary-list')
 # GPU Title, returns a list of objects
 title = soup.find_all('div', class_ = 'c-shca-icon-item__body-name')
 
+
+with open(filename, 'a') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(fieldheader)
+
+csvfile.close()
 for page in pages:
     r = requests.get(page)
     soup = BeautifulSoup(r.content,'html.parser')
