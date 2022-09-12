@@ -20,7 +20,7 @@ while flag:
 print("Here ya go!\n")
 print(gpu)
 
-print('\n')
+
 
 bool_series = gpu["Brand"].duplicated(keep = False)
 
