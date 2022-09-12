@@ -14,7 +14,19 @@ while flag:
         print("Please enter a valid name")
     else:
         gpu = df[(df['Title'] == gpu_name)]
+        gpu.sort_values("Price", inplace = True)
         flag = False
 
 print("Here ya go!\n")
+print(gpu)
+
+print('\n')
+
+bool_series = gpu["Brand"].duplicated(keep = False)
+
+print(bool_series)
+
+
+gpu = gpu[~bool_series]
+print(gpu.info())
 print(gpu)
