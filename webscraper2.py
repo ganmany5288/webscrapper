@@ -1,11 +1,20 @@
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv("gpu_recordsFORREAL.csv")
+df = pd.read_csv("gpu_recordsFORREAL.csv")
 
-data.columns = [column.replace(" ", "_") for column in data.columns]
-
-data.query(Brand == MSI)
+gpu_list = ["3060", "3060 Ti", "3070", "3070 Ti", "3080", "3080 Ti", "3090", "3090 Ti","6700", "6700 XT", "6800", "6800 XT", "6900 XT", "6950 XT"]
 
 
-print(data)
+flag = True
+
+while flag:
+    gpu_name = input("What GPU would you like to see: ")
+    if gpu_name not in gpu_list:
+        print("Please enter a valid name")
+    else:
+        gpu = df[(df['Title'] == gpu_name)]
+        flag = False
+
+print("Here ya go!\n")
+print(gpu)
