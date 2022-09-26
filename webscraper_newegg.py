@@ -30,8 +30,8 @@ rows = []
 def check_gpu_brand(price,title,brand):
     for i in range(len(price)):
         t1 = title[i].text
-        p1 = price[i].text
-        print(t1, p1)
+        p1 = price[i].text.split()[0]
+        print(p1.split())
         """
             Check the following GPU Brands
             1. MSI
